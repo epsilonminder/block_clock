@@ -1,0 +1,104 @@
+<html lang="ja">
+	<head>
+	<meta charset="UTF-8">
+	
+	<script lang="javascript">
+		function twoDigit(num){
+			var digit;
+			
+			if(num < 10){
+				digit = "0" + num;
+				}else {
+					digit = num;
+				}
+				return digit;
+			}
+		
+			function time_marker(num, mark1, mark2){
+				var a = Math.floor(num/10);
+				var b = num - a*10;
+				var str="";
+			
+				for(var i=1; i <= a; i++){
+					str += mark1;
+				}
+				for(var i=1; i <= b; i++){
+					str += mark2;
+				}
+			
+				return str;
+			
+			}
+		
+			function time_markerH(num){
+				var a = num;
+				var str = "";
+				var markL = "●";
+				var markS = "◯";
+				var AmarkL = "●";
+				var AmarkS = "◯";
+				var PmarkL = "★";
+				var PmarkS = "☆";
+			
+			/*
+				if( num > 12){
+					markL = AmarkL;
+					markS = AmarkS;
+				} else {
+					markL = PmarkL;
+					markS = PmarkS;
+				}
+			*/
+			
+				str = time_marker(a, markL, markS);
+				return str;
+			}
+		
+			function Clock(){
+				var now = new Date();
+				var h = twoDigit(now.getHours());
+				var m = twoDigit(now.getMinutes());
+				var s = twoDigit(now.getSeconds());
+			
+				document.getElementById("clock_time").innerHTML = h + ":" + m + ":" + s;
+				document.getElementById("time_bar").innerHTML = time_markerH(h) + "<br />" + 
+																							time_marker(m,"◆","◇") + "<br />" +
+																							time_marker(s,"■", "□");
+			}
+			window.setInterval(Clock,1000);
+		</script>
+		
+		<style type="text/css">
+		<!--
+			.parent {
+				  /* border: 1px solid #aaa; */
+				  width: 100%;
+				  height: 100%;
+				  position:relative;
+				  font-size:5vw;
+			}
+			
+			.child{
+				font-size: 80%;
+				/* border: 1px solid #aaa; */
+				width: 65%;
+				height:40%;
+				top:0;
+				bottom:0;
+				left:0;
+				right:0;
+				position:absolute;
+				margin: auto;
+			}
+			-->
+		</style>
+	</head>
+	<body>
+	<div class="parent">
+		<div class="child">
+			<span id="clock_time"></span><br />
+			<span id="time_bar"></span>
+		</div>
+	</div>
+	</body>
+</html>
