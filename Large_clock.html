@@ -14,56 +14,18 @@
 			return digit;
 		}
 		
-		function time_marker(num, mark1, mark2){
-			var a = Math.floor(num/10);
-			var b = num - a*10;
-			var str="";
-			
-			for(var i=1; i <= a; i++){
-				str += mark1;
-			}
-			for(var i=1; i <= b; i++){
-				str += mark2;
-			}
-			
-			return str;
-			
-		}
-		
-		function time_markerH(num){
-			var a = num;
-			var str = "";
-			var markL = "●";
-			var markS = "◯";
-			var AmarkL = "●";
-			var AmarkS = "◯";
-			var PmarkL = "★";
-			var PmarkS = "☆";
-			
-		/*
-			if( num > 12){
-				markL = AmarkL;
-				markS = AmarkS;
-			} else {
-				markL = PmarkL;
-				markS = PmarkS;
-			}
-		*/
-			
-			str = time_marker(a, markL, markS);
-			return str;
-		}
 		
 		function Clock(){
 			var now = new Date();
 			var h = twoDigit(now.getHours());
 			var m = twoDigit(now.getMinutes());
 			var s = twoDigit(now.getSeconds());
+			var date = now.toLocaleDateString() + "(" + 
+									String('日月火水木金土').charAt(now.getDay()) + ")";
 		
+			document.getElementById("date_str").innerHTML = date;
 			document.getElementById("clock_time").innerHTML = h + ":" + m + ":" + s;
-			document.getElementById("time_bar").innerHTML = time_markerH(h) + "<br />" + 
-																						time_marker(m,"◆","◇") + "<br />" +
-																							time_marker(s,"■", "□");
+			document.title= h + ":" + m ;
 		}
 		
 		window.setInterval(Clock,1000);
@@ -76,14 +38,14 @@
 				  width: 100%;
 				  height: 100%;
 				  position:relative;
-				  font-size:5vw;
+				  font-size: 18vw;
 			}
 			
 			.child{
-				font-size: 80%;
+				font-size: 100%;
 				/* border: 1px solid #aaa; */
-				width: 65%;
-				height:40%;
+				width: 100%;
+				height:60%;
 				top:0;
 				bottom:0;
 				left:0;
@@ -91,24 +53,25 @@
 				position:absolute;
 				margin: auto;
 			}
-
+			#date_str{
+				font-size: 50%;
+			}
 			#change_clock{
 				font-size:small;
 				color:rgb(4, 57, 88);
 			}
 			-->
 	</style>
-	
 	</head>
 	
 	<body>
 	<div>
-		<a href="./Large_clock.html", id="change_clock">Large_clock</a>
+		<a href="./index.html" id="change_clock">Block clock</a>
 	</div>
 	<div class="parent">
 		<div class="child">
+			<span id="date_str"></span><br />
 			<span id="clock_time"></span><br />
-			<span id="time_bar"></span>
 		</div>
 	</div>
 	</body>
